@@ -13,7 +13,7 @@ import javax.validation.constraints.Min;
 @Builder
 @Data
 public class ConfigureDeviceData {
-    @Min(value = 0, message = "Device temperature should be between 0\'C and 10\'C")
-    @Max(value = 10, message = "Device temperature should be between 0\'C and 10\'C")
+    @Min(value = 0, message = "Device temperature should be between 0'C and 10'C")
+    @Max(value = 10, message = "Device temperature should be between 0'C and 10'C")
     private double temperature;
 }

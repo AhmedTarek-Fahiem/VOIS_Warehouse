@@ -14,7 +14,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -30,7 +29,7 @@ public class DeviceConfigurationService {
         return deviceRepository.findAllByStatusOrderByPinDesc(DeviceStatus.READY)
                 .stream()
                 .map(device -> deviceMapper.toDeviceDetailsData(device))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Transactional

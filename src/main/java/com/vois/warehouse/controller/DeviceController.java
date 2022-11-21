@@ -75,7 +75,7 @@ public class DeviceController {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult()
                 .getAllErrors()
-                .forEach((error) -> errors.put(((FieldError) error).getField(), error.getDefaultMessage()));
+                .forEach(error -> errors.put(((FieldError) error).getField(), error.getDefaultMessage()));
         return errors;
     }
 
