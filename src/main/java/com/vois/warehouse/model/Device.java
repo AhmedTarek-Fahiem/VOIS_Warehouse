@@ -29,9 +29,11 @@ public class Device {
     private String pin;
 
     @Column(name = "temperature", nullable = false)
+    @Builder.Default
     private double temperature = -1;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private DeviceStatus status = DeviceStatus.READY;
 }
