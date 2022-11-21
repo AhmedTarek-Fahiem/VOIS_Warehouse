@@ -15,7 +15,6 @@ import javax.persistence.NonUniqueResultException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -31,7 +30,7 @@ public class DeviceService {
         return deviceRepository.findAllByStatusOrderByPinDesc(DeviceStatus.ACTIVE)
                 .stream()
                 .map(device -> deviceMapper.toDeviceDetailsData(device))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public DeviceDetailsData createDevice(DeviceData deviceData) throws NonUniqueResultException {
@@ -73,11 +72,11 @@ public class DeviceService {
     }
 
     private void validateDeviceUniqueness(UUID id, String name, String pin) {
-        Optional<Device> _device = deviceRepository.findDeviceByNameIgnoreCase(name);
-        if (_device.isPresent() && (id == null || !id.equals(_device.get().getId())))
+        Optional<Device> existDevice = deviceRepository.findDeviceByNameIgnoreCase(name);
+        if (existDevice.isPresent() && (id == null || !id.equals(existDevice.get().getId())))
             throw new NonUniqueResultException("Device with same name is already exists");
-        _device = deviceRepository.findDeviceByPin(pin);
-        if (_device.isPresent() && (id == null || !id.equals(_device.get().getId())))
+        existDevice = deviceRepository.findDeviceByPin(pin);
+        if (existDevice.isPresent() && (id == null || !id.equals(existDevice.get().getId())))
             throw new NonUniqueResultException("Use different PIN");
     }
 
