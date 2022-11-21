@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityNotFoundException;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ public class DeviceConfigurationService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public DeviceDetailsData configureDevice(String deviceId, ConfigureDeviceData configureDeviceData) throws IllegalArgumentException, EntityNotFoundException {
         UUID deviceUUID = UUID.fromString(deviceId);
         Device device = deviceRepository.findById(deviceUUID)
