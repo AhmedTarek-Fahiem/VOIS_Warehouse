@@ -12,7 +12,6 @@ import lombok.experimental.FieldNameConstants;
 public class DeviceDetailsData {
     private String id;
     private String name;
-    private String pin;
     private double temperature;
     private String status;
 }
