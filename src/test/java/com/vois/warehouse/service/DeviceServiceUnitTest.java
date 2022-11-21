@@ -18,6 +18,7 @@ import javax.persistence.NonUniqueResultException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,7 +50,7 @@ class DeviceServiceUnitTest {
                         .temperature(device.getTemperature())
                         .status(device.getStatus().toString())
                         .build())
-                .toList();
+                .collect(Collectors.toList());
 
         Mockito.when(deviceRepository.findAllByStatusOrderByPinDesc(DeviceStatus.ACTIVE))
                 .thenReturn(List.of(deviceModel));
